@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-19 08:00+0200\n"
-"PO-Revision-Date: 2023-06-19 10:34+0200\n"
+"PO-Revision-Date: 2023-06-19 10:35+0200\n"
 "Last-Translator: thomas.green@afnic.fr\n"
 "Language-Team: Zonemaster Team\n"
 "Language: fr\n"
@@ -112,8 +112,7 @@ msgstr "Tous les enregistrements PTR correspondent aux serveurs de noms."
 #, perl-brace-format
 msgid "No response from nameserver(s) on PTR query ({domain})."
 msgstr ""
-"Aucune réponse des serveurs de noms sur une requête de type \"PTR"
-"\" ({domain})."
+"Aucune réponse des serveurs de noms sur une requête de type PTR ({domain})."
 
 #. ADDRESS:TEST_CASE_END
 #. BASIC:TEST_CASE_END
@@ -159,7 +158,7 @@ msgstr "Le test \"cassé mais fonctionnel\""
 
 #. BASIC:A_QUERY_NO_RESPONSES
 msgid "Nameservers did not respond to A query."
-msgstr "Aucune réponse des serveurs de noms sur une requête de type \"A\"."
+msgstr "Aucune réponse des serveurs de noms sur une requête de type A."
 
 #. BASIC:B01_CHILD_IS_ALIAS
 #, perl-brace-format
@@ -2409,8 +2408,8 @@ msgstr ""
 #, perl-brace-format
 msgid "Nameserver {ns} answered query with an unexpected rcode ({rcode})."
 msgstr ""
-"Le serveur de noms {ns} a répondu à une requête de type \"AAAA\" avec un "
-"code retour inattendu ({rcode})."
+"Le serveur de noms {ns} a répondu à une requête avec un code retour "
+"inattendu ({rcode})."
 
 #. NAMESERVER:NAMESERVER01
 msgid "A name server should not be a recursor"
@@ -2480,22 +2479,20 @@ msgid ""
 "Nameserver {ns} answered AAAA query with an unexpected RDATA length "
 "({length} instead of 16)."
 msgstr ""
-"Le serveur de noms {ns} a répondu à une requête de type \"AAAA\" avec un "
-"code taille de champ RDATA inattendu ({length} au lieu de 16)."
+"Le serveur de noms {ns} a répondu à une requête de type AAAA avec une taille "
+"de RDATA inattendue ({length} au lieu de 16)."
 
 #. NAMESERVER:AAAA_QUERY_DROPPED
 #, perl-brace-format
 msgid "Nameserver {ns} dropped AAAA query."
-msgstr ""
-"Le serveur de noms {ns} ne répond pas aux requêtes portant sur le type \"AAAA"
-"\"."
+msgstr "Le serveur de noms {ns} ne répond pas aux requêtes de type AAAA."
 
 #. NAMESERVER:AAAA_UNEXPECTED_RCODE
 #, perl-brace-format
 msgid "Nameserver {ns} answered AAAA query with an unexpected rcode ({rcode})."
 msgstr ""
-"Le serveur de noms {ns} a répondu à une requête de type \"AAAA\" avec un "
-"code retour inattendu ({rcode})."
+"Le serveur de noms {ns} a répondu à une requête de type AAAA avec un code "
+"retour inattendu ({rcode})."
 
 #. NAMESERVER:AAAA_WELL_PROCESSED
 #, perl-brace-format
@@ -2503,28 +2500,24 @@ msgid ""
 "The following nameservers answer AAAA queries without problems : {ns_list}."
 msgstr ""
 "Les serveurs de noms suivants répondent correctement aux requêtes de type "
-"\"AAAA\" : {ns_list}."
+"AAAA : {ns_list}."
 
 #. NAMESERVER:A_UNEXPECTED_RCODE
 #, perl-brace-format
 msgid "Nameserver {ns} answered A query with an unexpected rcode ({rcode})."
 msgstr ""
-"Le serveur de noms {ns} a répondu à une requête de type \"AAAA\" avec un "
-"code retour inattendu ({rcode})."
+"Le serveur de noms {ns} a répondu à une requête de type A avec un code "
+"retour inattendu ({rcode})."
 
 #. NAMESERVER:AXFR_AVAILABLE
 #, perl-brace-format
 msgid "Nameserver {ns} allow zone transfer using AXFR."
-msgstr ""
-"Il est possible de réaliser un transfert de zone depuis le serveur de noms "
-"{ns}."
+msgstr "Le serveur de noms {ns} permet le transfert de zone avec AXFR."
 
 #. NAMESERVER:AXFR_FAILURE
 #, perl-brace-format
 msgid "AXFR not available on nameserver {ns}."
-msgstr ""
-"Il n'est pas possible de réaliser un transfert de zone depuis le serveur de "
-"noms {ns}."
+msgstr "Le transfert de zone n’est pas possible sur le serveur de noms {ns}."
 
 #. NAMESERVER:BREAKS_ON_EDNS
 #, perl-brace-format
@@ -2553,9 +2546,8 @@ msgid ""
 "When asked for {type} records on \"{domain}\" with different cases, all "
 "servers do not reply consistently."
 msgstr ""
-"Lors d'une requête de type {type} pour la ressource \"{domain}\" avec des "
-"casses différentes, tous les serveurs ne répondent pas de manière "
-"consistante."
+"Lors d'une requête de type {type} pour le nom \"{domain}\" avec des casses "
+"différentes, tous les serveurs ne répondent pas de manière consistante."
 
 #. NAMESERVER:CASE_QUERIES_RESULTS_OK
 #, perl-brace-format
@@ -2563,8 +2555,8 @@ msgid ""
 "When asked for {type} records on \"{domain}\" with different cases, all "
 "servers reply consistently."
 msgstr ""
-"Lors d'une requête de type {type} pour la ressource \"{domain}\" avec des "
-"casses différentes, tous les serveurs retournent les mêmes résultats."
+"Lors d'une requête de type {type} pour le nom \"{domain}\" avec des casses "
+"différentes, tous les serveurs retournent les mêmes résultats."
 
 #. NAMESERVER:CASE_QUERY_DIFFERENT_ANSWER
 #, perl-brace-format
@@ -2572,7 +2564,7 @@ msgid ""
 "When asked for {type} records on \"{query1}\" and \"{query2}\", nameserver "
 "{ns} returns different answers."
 msgstr ""
-"Lors d'une requête de type {type} pour les ressources \"{query1}\" et "
+"Lors d'une requête de type {type} pour les noms \"{query1}\" et "
 "\"{query2}\", le serveur de noms {ns} ne répond pas la même chose."
 
 #. NAMESERVER:CASE_QUERY_DIFFERENT_RC
@@ -2581,8 +2573,8 @@ msgid ""
 "When asked for {type} records on \"{query1}\" and \"{query2}\", nameserver "
 "{ns} returns different RCODE (\"{rcode1}\" vs \"{rcode2}\")."
 msgstr ""
-"Lors d'une requête de type {type} pour les ressources \"{query1}\" et "
-"\"{query2}\", le serveur de noms {ns} ne renvoie pas le même code de retour "
+"Lors d'une requête de type {type} pour les noms \"{query1}\" et "
+"\"{query2}\", le serveur de noms {ns} renvoie des codes de retour différents "
 "(\"{rcode1}\" vs \"{rcode2}\")."
 
 #. NAMESERVER:CASE_QUERY_NO_ANSWER
@@ -2591,8 +2583,8 @@ msgid ""
 "When asked for {type} records on \"{domain}\", nameserver {ns} returns "
 "nothing."
 msgstr ""
-"Lors d'une requête de type {type} pour la ressource\"{domain}\", le serveur "
-"de noms {ns} ne répond pas."
+"Lors d'une requête de type {type} pour le nom \"{domain}\", le serveur de "
+"noms {ns} ne répond pas."
 
 #. NAMESERVER:CASE_QUERY_SAME_ANSWER
 #, perl-brace-format
@@ -2600,7 +2592,7 @@ msgid ""
 "When asked for {type} records on \"{query1}\" and \"{query2}\", nameserver "
 "{ns} returns same answers."
 msgstr ""
-"Lors d'une requête de type {type} pour les ressources \"{query1}\" et "
+"Lors d'une requête de type {type} pour les noms \"{query1}\" et "
 "\"{query2}\", le serveur de noms {ns} répond la même chose."
 
 #. NAMESERVER:CASE_QUERY_SAME_RC
@@ -2609,7 +2601,7 @@ msgid ""
 "When asked for {type} records on \"{query1}\" and \"{query2}\", nameserver "
 "{ns} returns same RCODE \"{rcode}\"."
 msgstr ""
-"Lors d'une requête de type {type} pour les ressources \"{query1}\" et "
+"Lors d'une requête de type {type} pour les noms \"{query1}\" et "
 "\"{query2}\", le serveur de noms {ns} renvoie le même code de retour "
 "\"{rcode}\"."
 
@@ -2685,13 +2677,13 @@ msgstr "Aucune réponse de {ns} sur le nom de domaine '{domain}'."
 msgid ""
 "None of the following nameservers returns an upward referral : {nsname_list}."
 msgstr ""
-"Aucun des serveurs de noms suivants ne répond à la requête de type \"NS\" "
-"sur la racine '.' (upward referral) : {nsname_list}."
+"Aucun des serveurs de noms suivants ne répond à la requête de type NS sur la "
+"racine '.' (upward referral) : {nsname_list}."
 
 #. NAMESERVER:NS_ERROR
 #, perl-brace-format
 msgid "Erroneous response from nameserver {ns}."
-msgstr "Le serveur de noms {ns} n'a pas répondu aux requêtes de type \"NS\"."
+msgstr "Le serveur de noms {ns} n'a pas répondu aux requêtes de type NS."
 
 #. NAMESERVER:N10_EDNS_RESPONSE_ERROR
 #, perl-brace-format
@@ -2700,8 +2692,8 @@ msgid ""
 "Fetched from the nameservers with IP addresses {ns_ip_list}"
 msgstr ""
 "RCODE attendu, mais réponse erronée reçue à une requête EDNS version 1. "
-"Information retournée par les serveurs de noms ayant une des adresses IP "
-"suivantes \"{ns_ip_list}\"."
+"Information retournée par les serveurs de noms ayant pour adresses IP "
+"{ns_ip_list}."
 
 #. NAMESERVER:N10_NO_RESPONSE_EDNS1_QUERY
 #, perl-brace-format
@@ -2710,7 +2702,7 @@ msgid ""
 "addresses {ns_ip_list}"
 msgstr ""
 "Pas de réponse à une requête EDNS version 1. Information retournée par les "
-"serveurs de noms ayant une des adresses IP suivantes \"{ns_ip_list}\"."
+"serveurs de noms ayant pour adresses IP {ns_ip_list}."
 
 #. NAMESERVER:N10_UNEXPECTED_RCODE
 #, perl-brace-format
@@ -2719,8 +2711,8 @@ msgid ""
 "Fetched from the nameservers with IP addresses {ns_ip_list}"
 msgstr ""
 "RCODE erroné (\"{rcode}\") reçu en réponse à une requête EDNS version 1. "
-"Information retournée par les serveurs de noms ayant une des adresses IP "
-"suivantes \"{ns_ip_list}\"."
+"Information retournée par les serveurs de noms ayant pour adresses IP "
+"\"{ns_ip_list}\"."
 
 #. NAMESERVER:N11_N11_NO_EDNS
 #, perl-brace-format
@@ -2828,7 +2820,7 @@ msgstr ""
 #, perl-brace-format
 msgid "Nameserver {ns} returns an upward referral."
 msgstr ""
-"Le serveur de noms {ns} répond à la requête de type \"NS\" sur la racine "
+"Le serveur de noms {ns} répond à une requête de type NS sur la racine "
 "'.' (upward referral)."
 
 #. NAMESERVER:UPWARD_REFERRAL_IRRELEVANT
@@ -2840,7 +2832,7 @@ msgstr ""
 #, perl-brace-format
 msgid "Nameserver {ns} has one or more unknown EDNS Z flag bits set."
 msgstr ""
-"Le serveur de noms {ns} répond à une requête avec a un ou plusieurs bits \"Z"
+"Le serveur de noms {ns} répond à une requête avec un ou plusieurs bits \"Z"
 "\" (EDNS) positionnés."
 
 #. SYNTAX:SYNTAX01
@@ -3236,12 +3228,12 @@ msgstr ""
 #. ZONE:MX_RECORD_IS_CNAME
 msgid "MX record for the domain is pointing to a CNAME."
 msgstr ""
-"L'enregistrement de type \"MX\" pour le domaine pointe sur un alias (CNAME)."
+"L'enregistrement de type MX pour le domaine pointe sur un alias (CNAME)."
 
 #. ZONE:MX_RECORD_IS_NOT_CNAME
 msgid "MX record for the domain is not pointing to a CNAME."
 msgstr ""
-"L'enregistrement de type \"MX\" pour le domaine ne pointe pas sur un alias "
+"L'enregistrement de type MX pour le domaine ne pointe pas sur un alias "
 "(CNAME)."
 
 #. ZONE:MULTIPLE_SOA
@@ -3249,16 +3241,16 @@ msgstr ""
 msgid ""
 "Nameserver {ns} responds with multiple ({count}) SOA records on SOA queries."
 msgstr ""
-"Le serveur de noms {ns} répond aux requêtes de type \"SOA\" avec plusieurs "
-"enregistrements ({count})."
+"Le serveur de noms {ns} répond aux requêtes de type SOA avec plusieurs "
+"enregistrements ({count}) de type SOA."
 
 #. ZONE:NO_SOA_IN_RESPONSE
 #, perl-brace-format
 msgid ""
 "Response from nameserver {ns} on SOA queries does not contain SOA record."
 msgstr ""
-"La réponse du serveur de noms {ns} à une requête de type \"SOA\" ne contient "
-"aucun enregistrement de type \"SOA\"."
+"La réponse du serveur de noms {ns} à une requête de type SOA ne contient "
+"aucun enregistrement de type SOA."
 
 #. ZONE:MNAME_HAS_NO_ADDRESS
 #, perl-brace-format
@@ -3271,7 +3263,7 @@ msgstr ""
 msgid "A unique SOA record is returned by all nameservers of the zone."
 msgstr ""
 "L'ensemble des serveurs de la zone ont retourné un enregistrement de type "
-"\"SOA\" unique."
+"SOA unique."
 
 #. ZONE:EXPIRE_MINIMUM_VALUE_OK
 #, perl-brace-format
@@ -3289,7 +3281,7 @@ msgid ""
 "Nameserver {ns} responds with a wrong owner name ({owner} instead of {name}) "
 "on SOA queries."
 msgstr ""
-"Le serveur de noms {ns} répond aux requêtes de type \"SOA\" avec un nom de "
+"Le serveur de noms {ns} répond aux requêtes de type SOA avec un nom de "
 "domaine erroné ({owner} au lieu de {name})."
 
 #. ZONE:Z01_MNAME_HAS_LOCALHOST_ADDR
@@ -3335,15 +3327,14 @@ msgid ""
 "in the answer section."
 msgstr ""
 "Le serveur de noms du SOA MNAME \"{ns}\" ne retourne aucun enregistrement de "
-"type \"SOA\" dans la section \"answer\" de la réponse à une requête de type "
-"\"SOA\"."
+"type SOA dans la section \"answer\" de la réponse à une requête de type SOA."
 
 #. ZONE:Z01_MNAME_NO_RESPONSE
 #, perl-brace-format
 msgid "SOA MNAME name server \"{ns}\" does not respond to an SOA query."
 msgstr ""
 "Le serveur de noms du SOA MNAME \"{ns}\" ne répond pas aux requêtes de type "
-"\"SOA\"."
+"SOA."
 
 #. ZONE:Z01_MNAME_NOT_AUTHORITATIVE
 #, perl-brace-format
@@ -3357,8 +3348,8 @@ msgstr ""
 msgid ""
 "SOA MNAME name server \"{nsname}\" is not listed as NS record for the zone."
 msgstr ""
-"Le serveur maître défini dans le SOA MNAME, ({nsname}), ne fait pas partie "
-"des enregistrements de type \"NS\" listés par la zone."
+"Le serveur maître défini dans le SOA MNAME, \"{nsname}\", ne fait pas partie "
+"des enregistrements de type NS listés par la zone."
 
 #. ZONE:Z01_MNAME_NOT_MASTER
 #, perl-brace-format
@@ -3384,8 +3375,8 @@ msgid ""
 "SOA MNAME name server \"{ns}\" gives unexpected RCODE name (\"{rcode}\") in "
 "response to an SOA query."
 msgstr ""
-"Le serveur de noms du SOA MNAME \"{ns}\" a répondu à une requête de type "
-"\"SOA\" avec un code de retour inattendu ({rcode})."
+"Le serveur de noms du SOA MNAME \"{ns}\" a répondu à une requête de type SOA "
+"avec un code de retour inattendu ({rcode})."
 
 #. ZONE:Z09_INCONSISTENT_MX
 msgid "Some name servers return an MX RRset while others return none."
