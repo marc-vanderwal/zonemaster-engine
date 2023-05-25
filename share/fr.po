@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-19 08:00+0200\n"
-"PO-Revision-Date: 2023-06-19 08:14+0200\n"
+"PO-Revision-Date: 2023-06-19 10:34+0200\n"
 "Last-Translator: thomas.green@afnic.fr\n"
 "Language-Team: Zonemaster Team\n"
 "Language: fr\n"
@@ -151,7 +151,7 @@ msgstr "Le nom de domaine doit avoir un domaine parent"
 
 #. BASIC:BASIC02
 msgid "The domain must have at least one working name server"
-msgstr "Le nom de domaine doit avoir au moins un serveur de nom fonctionnel"
+msgstr "Le nom de domaine doit avoir au moins un serveur de noms fonctionnel"
 
 #. BASIC:BASIC03
 msgid "The Broken but functional test"
@@ -765,17 +765,17 @@ msgstr "Cohérence du MNAME du SOA"
 #. CONSISTENCY:ADDRESSES_MATCH
 msgid "Glue records are consistent between glue and authoritative data."
 msgstr ""
-"La liste des adresses IP des serveurs de nom retournée par les serveurs de "
+"La liste des adresses IP des serveurs de noms retournée par les serveurs de "
 "noms de la zone parente et par ceux de la zone est identique."
 
 #. CONSISTENCY:CHILD_NS_FAILED
 #, perl-brace-format
 msgid "Unexpected or erroneous reply from {ns}."
-msgstr "Réponse inattendue ou erronéeLe du serveur de noms {ns}."
+msgstr "Réponse inattendue ou erronée du serveur de noms {ns}."
 
 #. CONSISTENCY:CHILD_ZONE_LAME
 msgid "Lame delegation."
-msgstr "Utilisation d'une configuration DNS alternative (fake delegation)."
+msgstr "Délégation boîteuse."
 
 #. CONSISTENCY:EXTRA_ADDRESS_CHILD
 #, perl-brace-format
@@ -809,7 +809,8 @@ msgstr ""
 #, perl-brace-format
 msgid "Saw {count} SOA mname."
 msgstr ""
-"Plusieurs adresses mail ({count}) ont été trouvées dans les différents SOA."
+"Plusieurs noms de serveurs de noms primaires ({count}) ont été trouvés dans "
+"les différents SOA."
 
 #. CONSISTENCY:MULTIPLE_SOA_RNAMES
 #, perl-brace-format
@@ -2232,29 +2233,28 @@ msgstr ""
 #, perl-brace-format
 msgid "Child has nameserver(s) not listed at parent ({extra})."
 msgstr ""
-"Les serveurs de noms de la zone retournent des serveurs faisant autorité "
-"({extra}) qui ne le sont pas par les serveurs de noms de la zone parente."
+"La zone a des serveurs de noms ({extra}) qui ne sont pas listés dans la zone "
+"parente."
 
 #. DELEGATION:EXTRA_NAME_PARENT
 #, perl-brace-format
 msgid "Parent has nameserver(s) not listed at the child ({extra})."
 msgstr ""
-"Les serveurs de noms de la zone parente retournent des serveurs faisant "
-"autorité ({extra}) qui ne le sont pas par les serveurs de noms de la zone."
+"La zone parente a des serveurs de noms ({extra}) qui ne sont pas listés dans "
+"la zone."
 
 #. DELEGATION:IS_NOT_AUTHORITATIVE
 #, perl-brace-format
 msgid "Nameserver {ns} response is not authoritative on {proto} port 53."
 msgstr ""
-"La réponse du serveur de noms {ns} reçue sur le port 53/{proto} ne fait pas "
-"autorité."
+"La réponse du serveur de noms {ns} ne fait pas autorité en {proto} sur le "
+"port 53."
 
 #. DELEGATION:NAMES_MATCH
 msgid "All of the nameserver names are listed both at parent and child."
 msgstr ""
-"Tous les serveurs de noms de la zone font partie de la liste des serveurs de "
-"noms retournés par les serveurs de noms de la zone parente ainsi que par les "
-"serveurs de noms de la zone elle-même."
+"Tous les noms des serveurs de noms sont listés aussi bien dans la zone que "
+"dans la zone parente."
 
 #. DELEGATION:NOT_ENOUGH_IPV4_NS_CHILD
 #, perl-brace-format
@@ -2262,9 +2262,9 @@ msgid ""
 "Child does not list enough ({count}) nameservers ({nsname_list}) that "
 "resolve to IPv4 addresses ({ns_ip_list}). Lower limit set to {minimum}."
 msgstr ""
-"Les serveurs de noms de la zone ne retournent pas assez de serveurs "
-"({count}) faisant autorité ({nsname_list}) ayant une adresse IPv4 "
-"({ns_ip_list}). La limite inférieure étant fixée à {minimum}."
+"La zone ne liste pas assez de serveurs ({count}) faisant autorité "
+"({nsname_list}) ayant une adresse IPv4 ({ns_ip_list}). La limite inférieure "
+"est fixée à {minimum}."
 
 #. DELEGATION:NOT_ENOUGH_IPV4_NS_DEL
 #, perl-brace-format
@@ -2272,9 +2272,9 @@ msgid ""
 "Delegation does not list enough ({count}) nameservers ({nsname_list}) that "
 "resolve to IPv4 addresses ({ns_ip_list}). Lower limit set to {minimum}."
 msgstr ""
-"Les serveurs de noms de la zone parente ne retournent pas assez de serveurs "
-"({count}) faisant autorité ({nsname_list}) ayant une adresse IPv4 "
-"({ns_ip_list}). La limite inférieure étant fixée à {minimum}."
+"La zone parente ne liste pas assez de serveurs ({count}) faisant autorité "
+"({nsname_list}) ayant une adresse IPv4 ({ns_ip_list}). La limite inférieure "
+"étant fixée à {minimum}."
 
 #. DELEGATION:NOT_ENOUGH_IPV6_NS_CHILD
 #, perl-brace-format
@@ -2282,9 +2282,9 @@ msgid ""
 "Child does not list enough ({count}) nameservers ({nsname_list}) that "
 "resolve to IPv6 addresses ({ns_ip_list}). Lower limit set to {minimum}."
 msgstr ""
-"Les serveurs de noms de la zone ne retournent pas assez de serveurs "
-"({count}) faisant autorité ({nsname_list}) ayant une adresse IPv6 "
-"({ns_ip_list}). La limite inférieure étant fixée à {minimum}."
+"La zone ne liste pas assez de serveurs ({count}) faisant autorité "
+"({nsname_list}) ayant une adresse IPv6 ({ns_ip_list}). La limite inférieure "
+"étant fixée à {minimum}."
 
 #. DELEGATION:NOT_ENOUGH_IPV6_NS_DEL
 #, perl-brace-format
@@ -2292,9 +2292,9 @@ msgid ""
 "Delegation does not list enough ({count}) nameservers ({nsname_list}) that "
 "resolve to IPv6 addresses ({ns_ip_list}). Lower limit set to {minimum}."
 msgstr ""
-"Les serveurs de noms de la zone parente ne retournent pas assez de serveurs "
-"({count}) faisant autorité ({nsname_list}) ayant une adresse IPv6 "
-"({ns_ip_list}). La limite inférieure étant fixée à {minimum}."
+"La zone parente ne liste pas assez de serveurs ({count}) faisant autorité "
+"({nsname_list}) ayant une adresse IPv6 ({ns_ip_list}). La limite inférieure "
+"étant fixée à {minimum}."
 
 #. DELEGATION:NOT_ENOUGH_NS_CHILD
 #, perl-brace-format
@@ -2302,9 +2302,8 @@ msgid ""
 "Child does not list enough ({count}) nameservers ({nsname_list}). Lower "
 "limit set to {minimum}."
 msgstr ""
-"Les serveurs de noms de la zone ne retournent pas assez de serveurs "
-"({count}) faisant autorité ({nsname_list}). La limite inférieure étant fixée "
-"à {minimum}."
+"La zone ne liste pas assez de serveurs ({count}) faisant autorité "
+"({nsname_list}). La limite inférieure étant fixée à {minimum}."
 
 #. DELEGATION:NOT_ENOUGH_NS_DEL
 #, perl-brace-format
@@ -2312,9 +2311,8 @@ msgid ""
 "Parent does not list enough ({count}) nameservers ({nsname_list}). Lower "
 "limit set to {minimum}."
 msgstr ""
-"Les serveurs de noms de la zone parente ne retournent pas assez de serveurs "
-"({count}) faisant autorité ({nsname_list}). La limite inférieure étant fixée "
-"à {minimum}."
+"La zone parente ne liste pas assez de serveurs ({count}) faisant autorité "
+"({nsname_list}). La limite inférieure étant fixée à {minimum}."
 
 #. DELEGATION:NO_IPV4_NS_CHILD
 #, perl-brace-format
@@ -2322,8 +2320,8 @@ msgid ""
 "Child lists no nameserver that resolves to an IPv4 address. If any were "
 "present, the minimum allowed would be {minimum}."
 msgstr ""
-"Les serveurs de noms de la zone ne retournent pas de serveurs ayant une "
-"adresse IPv4. Si il y en avait, il en faudrait au minimum {minimum}."
+"Aucun des serveurs de noms listé par la zone n’a d’adresse IPv4. S’il y en "
+"avait, il en faudrait au minimum {minimum}."
 
 #. DELEGATION:NO_IPV4_NS_DEL
 #, perl-brace-format
@@ -2331,8 +2329,8 @@ msgid ""
 "Delegation lists no nameserver that resolves to an IPv4 address. If any were "
 "present, the minimum allowed would be {minimum}."
 msgstr ""
-"Les serveurs de noms de la zone parente ne retournent pas de serveurs ayant "
-"une adresse IPv4. Si il y en avait, il en faudrait au minimum {minimum}."
+"Aucun des serveurs de noms listé par la zone parente n’a d’adresse IPv4. "
+"S’il y en avait, il en faudrait au minimum {minimum}."
 
 #. DELEGATION:NO_IPV6_NS_CHILD
 #, perl-brace-format
@@ -2341,7 +2339,7 @@ msgid ""
 "present, the minimum allowed would be {minimum}."
 msgstr ""
 "Les serveurs de noms de la zone ne retournent pas de serveurs ayant une "
-"adresse IPv6. Si il y en avait, il en faudrait au minimum {minimum}."
+"adresse IPv6. S’il y en avait, il en faudrait au minimum {minimum}."
 
 #. DELEGATION:NO_IPV6_NS_DEL
 #, perl-brace-format
@@ -3206,7 +3204,7 @@ msgid ""
 "({lowest_minimum}/{highest_minimum})."
 msgstr ""
 "Dans le SOA, la valeur du champ 'minimum' ({minimum}) est comprise dans "
-"l'interval de valeurs recommandées ({lowest_minimum}/{highest_minimum})."
+"l'intervalle de valeurs recommandées ({lowest_minimum}/{highest_minimum})."
 
 #. ZONE:EXPIRE_MINIMUM_VALUE_LOWER
 #, perl-brace-format
