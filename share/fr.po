@@ -299,8 +299,7 @@ msgstr ""
 msgid ""
 "Domain name ({domain}) has a label ({label}) too long ({dlength}/{max})."
 msgstr ""
-"Le nom de domaine '{domain}' a un label ({label}) trop long ({dlength}/"
-"{max})."
+"Le nom de domaine {domain} a un label ({label}) trop long ({dlength}/{max})."
 
 #. BASIC:DOMAIN_NAME_TOO_LONG
 #, perl-brace-format
@@ -317,7 +316,7 @@ msgstr "Le nom de domaine '{domain}' a un label de taille zéro."
 msgid "Nameserver {ns} returned \"A\" record(s) for {domain}."
 msgstr ""
 "Le serveur de noms {ns} renvoie un enregistrement de type \"A\" en réponse à "
-"une requête pour '{domain}'."
+"une requête pour {domain}."
 
 #. BASIC:HAS_NAMESERVER_NO_WWW_A_TEST
 #, perl-brace-format
@@ -657,8 +656,8 @@ msgstr ""
 #, perl-brace-format
 msgid "ASN Database error. No data to analyze for {ns_ip}."
 msgstr ""
-"La base de données des numéros d'AS retourne une erreur. Aucune donnée à "
-"analyser pour l'adresse IP {ns_ip}."
+"Erreur avec la base de données des numéros d'AS. Aucune donnée à analyser "
+"pour l'adresse IP {ns_ip}."
 
 #. CONNECTIVITY:EMPTY_ASN_SET
 #, perl-brace-format
@@ -3010,12 +3009,12 @@ msgstr ""
 #. SYNTAX:NO_RESPONSE_MX_QUERY
 #. ZONE:NO_RESPONSE_MX_QUERY
 msgid "No response from nameserver(s) on MX queries."
-msgstr "Aucune réponse des serveurs de noms sur une requête de type \"MX\"."
+msgstr "Aucune réponse des serveurs de noms sur une requête de type MX."
 
 #. SYNTAX:NO_RESPONSE_SOA_QUERY
 #. ZONE:NO_RESPONSE_SOA_QUERY
 msgid "No response from nameserver(s) on SOA queries."
-msgstr "Aucune réponse des serveurs de noms sur une requête de type \"SOA\"."
+msgstr "Aucune réponse des serveurs de noms sur une requête de type SOA."
 
 #. SYNTAX:ONLY_ALLOWED_CHARS
 #, perl-brace-format
@@ -3427,8 +3426,8 @@ msgstr ""
 msgid ""
 "Non-authoritative response on MX query from name servers \"{ns_ip_list}\"."
 msgstr ""
-"La réponse des serveurs de noms \"{ns_ip_list}\" à une requête de type \"MX"
-"\" ne fait pas autorité."
+"La réponse des serveurs de noms \"{ns_ip_list}\" à une requête de type MX ne "
+"fait pas autorité."
 
 #. ZONE:Z09_NO_MX_FOUND
 #, perl-brace-format
