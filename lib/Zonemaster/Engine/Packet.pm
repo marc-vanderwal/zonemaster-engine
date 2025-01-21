@@ -7,6 +7,7 @@ use version; our $VERSION = version->declare("v1.0.5");
 
 use Class::Accessor 'antlers';
 use Carp qw( confess );
+use Memoize;
 use Zonemaster::Engine::Util;
 
 has 'packet' => (
@@ -126,6 +127,11 @@ sub get_records {
 
     return @raw;
 } ## end sub get_records
+
+
+# The get_records() function is not very computationally expensive but gets
+# called very very often. Memoizing it gives a noticable speed boost.
+memoize('get_records');
 
 sub get_records_for_name {
     my ( $self, $type, $name, @section ) = @_;
