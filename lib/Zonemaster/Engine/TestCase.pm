@@ -3,10 +3,6 @@ package Zonemaster::Engine::TestCase;
 use v5.16.0;
 use warnings;
 
-use Exporter 'import';
-
-our @EXPORT = qw(MODIFY_CODE_ATTRIBUTES);
-
 =head1 NAME
 
 Zonemaster::Engine::TestCase - Common behavior and scaffolding for Zonemaster test cases
@@ -88,30 +84,51 @@ sub _wrap_testcase {
     };
 }
 
-=head2 MODIFY_CODE_ATTRIBUTES
+=head2 import
 
-This function is automatically exported into the module which C<use>s
-C<Zonemaster::Engine::TestCase>, so that function definitions with at least
-one attribute in those modules are handled appropriately at compile-time.
+Automatically called by Perl when C<use>-ing this module.
+
+On C<use>, this module defines a function in the calling package called
+C<MODIFY_CODE_ATTRIBUTES>, which is itself automatically called by Perl when
+the calling package defines a function with at least one attribute.
 
 =cut
 
-sub MODIFY_CODE_ATTRIBUTES {
-    my ( $package, $coderef, @attributes ) = @_;
+sub import {
+    my ( $class ) = @_;
 
-    my @bad_attributes;
+    my $calling_module = caller();
 
-    for my $attribute (@attributes) {
-        if ($attribute eq 'TestCase') {
-            my $sym = _find_code_sym( $package, $coderef );
-            _wrap_testcase( $package, $coderef, $sym );
+    # We could check here if the calling module name starts with
+    # Zonemaster::Engine::Test:: and act appropriately if not. But do we
+    # really need that? Besides, how would third-party test modules fit in
+    # this picture, should we decide to allow that?
+
+    return unless defined $calling_module;
+
+    my $modname = ( split /::/, $calling_module )[-1];
+
+    no strict 'refs';
+
+    # Export a handler for function attributes so that code such as
+    # "sub example01 : TestCase { ... }" works
+    *{"${calling_module}::MODIFY_CODE_ATTRIBUTES"} = sub {
+        my ( $package, $coderef, @attributes ) = @_;
+
+        my @bad_attributes;
+
+        for my $attribute (@attributes) {
+            if ($attribute eq 'TestCase') {
+                my $sym = _find_code_sym( $package, $coderef );
+                _wrap_testcase( $package, $coderef, $sym );
+            }
+            else {
+                push @bad_attributes, $attribute;
+            }
         }
-        else {
-            push @bad_attributes, $attribute;
-        }
-    }
 
-    return @bad_attributes;
+        return @bad_attributes;
+    };
 }
 
 1;
