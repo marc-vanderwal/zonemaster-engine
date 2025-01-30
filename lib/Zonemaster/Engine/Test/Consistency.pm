@@ -13,6 +13,7 @@ use Zonemaster::Engine::Profile;
 use Zonemaster::Engine::Constants qw[:ip :soa];
 use Zonemaster::Engine::Test::Address;
 use Zonemaster::Engine::Util;
+use Zonemaster::Engine::TestCase;
 use Zonemaster::Engine::TestMethods;
 
 =head1 NAME
@@ -467,11 +468,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub consistency01 {
+sub consistency01 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Consistency01';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my %serials;
     my $query_type = q{SOA};
@@ -544,7 +544,7 @@ sub consistency01 {
         }
     } ## end elsif ( scalar @serial_numbers)
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub consistency01
 
 =over
@@ -563,11 +563,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub consistency02 {
+sub consistency02 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Consistency02';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my %rnames;
     my $query_type = q{SOA};
@@ -627,7 +626,7 @@ sub consistency02 {
         }
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub consistency02
 
 =over
@@ -646,11 +645,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub consistency03 {
+sub consistency03 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Consistency03';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my %time_parameter_sets;
     my $query_type = q{SOA};
@@ -721,7 +719,7 @@ sub consistency03 {
         }
     } ## end elsif ( scalar( keys %time_parameter_sets...))
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub consistency03
 
 =over
@@ -740,11 +738,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub consistency04 {
+sub consistency04 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Consistency04';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my %ns_sets;
     my $query_type = q{NS};
@@ -799,7 +796,7 @@ sub consistency04 {
         }
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub consistency04
 
 =over
@@ -818,11 +815,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub consistency05 {
+sub consistency05 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Consistency05';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %strict_glue;
     my %extended_glue;
 
@@ -955,7 +951,7 @@ sub consistency05 {
         push @results, _emit_log( ADDRESSES_MATCH => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub consistency05
 
 =over
@@ -974,11 +970,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub consistency06 {
+sub consistency06 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Consistency06';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my %mnames;
     my $query_type = q{SOA};
@@ -1038,7 +1033,7 @@ sub consistency06 {
         }
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub consistency06
 
 1;

@@ -12,6 +12,7 @@ use Readonly;
 
 use Zonemaster::Engine::Recursor;
 use Zonemaster::Engine::Constants qw[:addresses :ip];
+use Zonemaster::Engine::TestCase;
 use Zonemaster::Engine::TestMethods;
 use Zonemaster::Engine::Util qw[name should_run_test];
 
@@ -290,11 +291,11 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub address01 {
+sub address01 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Address01';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
+    my %ips;
 
     my @nss = uniq grep { $_->isa('Zonemaster::Engine::Nameserver') } (
                 @{ Zonemaster::Engine::TestMethodsV2->get_del_ns_names_and_ips( $zone ) // [] },
@@ -387,7 +388,7 @@ sub address01 {
             );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub address01
 
 =over
@@ -406,11 +407,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub address02 {
+sub address02 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Address02';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my %ips;
     my $ptr_query;
@@ -458,11 +458,11 @@ sub address02 {
 
     } ## end foreach my $local_ns ( @{ Zonemaster::Engine::TestMethods...})
 
-    if ( scalar keys %ips and not grep { $_->tag ne q{TEST_CASE_START} } @results ) {
+    if ( scalar keys %ips and not @results ) {
         push @results, _emit_log( NAMESERVERS_IP_WITH_REVERSE => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub address02
 
 =over
@@ -481,11 +481,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub address03 {
+sub address03 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Address03';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my $ptr_query;
 
     my %ips;
@@ -540,7 +539,7 @@ sub address03 {
         push @results, _emit_log( NAMESERVER_IP_PTR_MATCH => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub address03
 
 1;

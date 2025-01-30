@@ -16,6 +16,7 @@ use Zonemaster::Engine::Profile;
 use Zonemaster::Engine::Constants qw[:name :ip];
 use Zonemaster::Engine::DNSName;
 use Zonemaster::Engine::Packet;
+use Zonemaster::Engine::TestCase;
 use Zonemaster::Engine::TestMethods;
 use Zonemaster::Engine::Util qw[should_run_test name];
 use Zonemaster::LDNS;
@@ -672,11 +673,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub syntax01 {
+sub syntax01 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Syntax01';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my $name = $zone->name;
 
@@ -697,7 +697,7 @@ sub syntax01 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub syntax01
 
 =over
@@ -716,11 +716,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub syntax02 {
+sub syntax02 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Syntax02';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my $name = $zone->name;
 
@@ -754,7 +753,7 @@ sub syntax02 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub syntax02
 
 =over
@@ -773,11 +772,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub syntax03 {
+sub syntax03 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Syntax03';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my $name = $zone->name;
 
@@ -802,7 +800,7 @@ sub syntax03 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub syntax03
 
 =over
@@ -821,11 +819,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub syntax04 {
+sub syntax04 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Syntax04';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     foreach my $local_nsname (
         uniq(
@@ -837,7 +834,7 @@ sub syntax04 {
         push @results, _check_name_syntax( q{NAMESERVER}, $local_nsname );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 }
 
 =over
@@ -856,11 +853,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub syntax05 {
+sub syntax05 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Syntax05';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my $p = $zone->query_one( $zone->name, q{SOA} );
 
@@ -888,7 +884,7 @@ sub syntax05 {
         push @results, _emit_log( NO_RESPONSE_SOA_QUERY => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub syntax05
 
 =over
@@ -907,11 +903,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub syntax06 {
+sub syntax06 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Syntax06';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my @nss;
     {
@@ -1055,7 +1050,7 @@ sub syntax06 {
           ) for keys %rname_candidates;
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => (split /::/, (caller(0))[3])[-1] } ) );
+    return @results;
 } ## end sub syntax06
 
 =over
@@ -1074,11 +1069,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub syntax07 {
+sub syntax07 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Syntax07';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my $p = $zone->query_one( $zone->name, q{SOA} );
 
@@ -1091,7 +1085,7 @@ sub syntax07 {
         push @results, _emit_log( NO_RESPONSE_SOA_QUERY => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 }
 
 =over
@@ -1110,11 +1104,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub syntax08 {
+sub syntax08 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Syntax08';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my $p = $zone->query_one( $zone->name, q{MX} );
 
@@ -1128,7 +1121,7 @@ sub syntax08 {
         push @results, _emit_log( NO_RESPONSE_MX_QUERY => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 }
 
 1;
