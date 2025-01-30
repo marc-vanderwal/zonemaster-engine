@@ -110,6 +110,12 @@ sub import {
 
     no strict 'refs';
 
+    # Export an _emit_log method
+    *{"${calling_module}::_emit_log"} = sub {
+        my ( $tag, $argref ) = @_;
+        return Zonemaster::Engine->logger->add( $tag, $argref, $modname );
+    };
+
     # Export a handler for function attributes so that code such as
     # "sub example01 : TestCase { ... }" works
     *{"${calling_module}::MODIFY_CODE_ATTRIBUTES"} = sub {
