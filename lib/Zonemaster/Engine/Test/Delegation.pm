@@ -14,6 +14,7 @@ use Zonemaster::Engine::Recursor;
 use Zonemaster::Engine::Constants ':all';
 use Zonemaster::Engine::Test::Address;
 use Zonemaster::Engine::Test::Syntax;
+use Zonemaster::Engine::TestCase;
 use Zonemaster::Engine::TestMethods;
 use Zonemaster::Engine::Util;
 use Zonemaster::LDNS::Packet;
@@ -583,11 +584,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub delegation01 {
+sub delegation01 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Delegation01';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     # Determine delegation NS names
     my @del_nsnames = map { $_->string } @{ Zonemaster::Engine::TestMethods->method2( $zone ) };
@@ -693,7 +693,7 @@ sub delegation01 {
         push @results, _emit_log( NO_IPV6_NS_DEL => $del_ns_ipv6_args );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub delegation01
 
 =over
@@ -712,11 +712,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub delegation02 {
+sub delegation02 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Delegation02';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my @nss_del   = @{ Zonemaster::Engine::TestMethods->method4( $zone ) };
     my @nss_child = @{ Zonemaster::Engine::TestMethods->method5( $zone ) };
@@ -742,7 +741,7 @@ sub delegation02 {
         ns_list       => [ @nss_del, @nss_child ],
       );
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub delegation02
 
 =over
@@ -761,11 +760,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub delegation03 {
+sub delegation03 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Delegation03';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my $long_name = _max_length_name_for( $zone->name );
     my @nsnames   = map { $_->string } @{ Zonemaster::Engine::TestMethods->method2( $zone ) };
@@ -812,7 +810,7 @@ sub delegation03 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub delegation03
 
 =over
@@ -831,11 +829,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub delegation04 {
+sub delegation04 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Delegation04';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames;
     my @authoritatives;
     my $query_type = q{SOA};
@@ -888,7 +885,7 @@ sub delegation04 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub delegation04
 
 =over
@@ -907,11 +904,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub delegation05 {
+sub delegation05 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Delegation05';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my @nsnames = @{ Zonemaster::Engine::TestMethods->method2and3( $zone ) };
 
@@ -968,7 +964,7 @@ sub delegation05 {
         push @results, _emit_log( NO_NS_CNAME => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub delegation05
 
 =over
@@ -987,11 +983,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub delegation06 {
+sub delegation06 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Delegation06';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames;
     my $query_type = q{SOA};
 
@@ -1026,7 +1021,7 @@ sub delegation06 {
         push @results, _emit_log( SOA_EXISTS => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub delegation06
 
 =over
@@ -1045,11 +1040,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub delegation07 {
+sub delegation07 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Delegation07';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my %names;
     foreach my $name ( @{ Zonemaster::Engine::TestMethods->method2( $zone ) } ) {
@@ -1100,7 +1094,7 @@ sub delegation07 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub delegation07
 
 1;

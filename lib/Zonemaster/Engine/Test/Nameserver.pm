@@ -15,6 +15,7 @@ use Zonemaster::Engine::Profile;
 use Zonemaster::Engine::Constants qw[:ip];
 use Zonemaster::Engine::Test::Address;
 use Zonemaster::Engine::Util;
+use Zonemaster::Engine::TestCase;
 use Zonemaster::Engine::TestMethods;
 
 =head1 NAME
@@ -655,11 +656,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver01 {
+sub nameserver01 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver01';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my @nss =  @{ Zonemaster::Engine::TestMethods->method4and5( $zone ) };
 
@@ -707,7 +707,7 @@ sub nameserver01 {
         }
     } ## end for my $ns ( @nss )
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver01
 
 =over
@@ -726,11 +726,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver02 {
+sub nameserver02 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver02';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my $n_error = 0;
 
@@ -812,7 +811,7 @@ sub nameserver02 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver02
 
 =over
@@ -831,11 +830,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver03 {
+sub nameserver03 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver03';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
 
     my @nss =  @{ Zonemaster::Engine::TestMethods->method4and5( $zone ) };
@@ -861,7 +859,7 @@ sub nameserver03 {
         $nsnames_and_ip{ $local_ns->name->string . q{/} . $local_ns->address->short }++;
     } ## end foreach my $local_ns ( @{ Zonemaster::Engine::TestMethods...})
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver03
 
 =over
@@ -880,11 +878,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver04 {
+sub nameserver04 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver04';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my $n_error = 0;
 
@@ -921,7 +918,7 @@ sub nameserver04 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver04
 
 =over
@@ -940,11 +937,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver05 {
+sub nameserver05 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver05';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my $aaaa_issue = 0;
     my @aaaa_ok;
@@ -1026,7 +1022,7 @@ sub nameserver05 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver05
 
 =over
@@ -1045,11 +1041,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver06 {
+sub nameserver06 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver06';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my @all_nsnames = uniq map { lc( $_->string ) } @{ Zonemaster::Engine::TestMethods->method2( $zone ) },
       @{ Zonemaster::Engine::TestMethods->method3( $zone ) };
     my @all_nsnames_with_ip = uniq map { lc( $_->name->string ) } @{ Zonemaster::Engine::TestMethods->method4and5( $zone ) };
@@ -1080,7 +1075,7 @@ sub nameserver06 {
         push @results, _emit_log( CAN_BE_RESOLVED => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver06
 
 =over
@@ -1099,11 +1094,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver07 {
+sub nameserver07 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver07';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my %nsnames;
     my $n_error = 0;
@@ -1141,7 +1135,7 @@ sub nameserver07 {
         }
     } ## end else [ if ( $zone->name eq q{.})]
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver07
 
 =over
@@ -1160,11 +1154,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver08 {
+sub nameserver08 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver08';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my $original_name = q{www.} . $zone->name->string;
     my $randomized_uc_name;
@@ -1210,7 +1203,7 @@ sub nameserver08 {
         $nsnames_and_ip{ $local_ns->name->string . q{/} . $local_ns->address->short }++;
     } ## end foreach my $local_ns ( @{ Zonemaster::Engine::TestMethods...})
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver08
 
 =over
@@ -1229,11 +1222,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver09 {
+sub nameserver09 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver09';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
     my %nsnames_and_ip;
     my $original_name = q{www.} . $zone->name->string;
     my $record_type   = q{SOA};
@@ -1365,7 +1357,7 @@ sub nameserver09 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver09
 
 =over
@@ -1384,11 +1376,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver10 {
+sub nameserver10 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver10';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my @no_response_edns1;
     my %unexpected_rcode;
@@ -1451,7 +1442,7 @@ sub nameserver10 {
             );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver10
 
 =over
@@ -1470,11 +1461,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver11 {
+sub nameserver11 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver11';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my @no_response;
     my %unexpected_rcode;
@@ -1576,7 +1566,7 @@ sub nameserver11 {
         push @results, _emit_log( N11_RETURNS_UNKNOWN_OPTION_CODE => { ns_ip_list => join( q{;}, uniq sort @unknown_opt_code ) } );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver11
 
 =over
@@ -1595,11 +1585,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver12 {
+sub nameserver12 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver12';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my @nss =  @{ Zonemaster::Engine::TestMethods->method4and5( $zone ) };
 
@@ -1634,7 +1623,7 @@ sub nameserver12 {
         }
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver12
 
 =over
@@ -1653,11 +1642,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver13 {
+sub nameserver13 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver13';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my @nss =  @{ Zonemaster::Engine::TestMethods->method4and5( $zone ) };
 
@@ -1692,7 +1680,7 @@ sub nameserver13 {
         }
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver13
 
 =over
@@ -1711,11 +1699,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub nameserver15 {
+sub nameserver15 : TestCase {
     my ( $class, $zone ) = @_;
 
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Nameserver15';
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my %txt_data;
     my %error_on_version_query;
@@ -1802,7 +1789,7 @@ sub nameserver15 {
           );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub nameserver15
 
 1;

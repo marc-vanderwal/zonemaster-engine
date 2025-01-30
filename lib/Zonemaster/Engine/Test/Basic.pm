@@ -14,6 +14,7 @@ use Zonemaster::Engine::Profile;
 use Zonemaster::Engine::Constants qw[:ip :name];
 use Zonemaster::Engine::Test::Address;
 use Zonemaster::Engine::Test::Syntax;
+use Zonemaster::Engine::TestCase;
 use Zonemaster::Engine::TestMethods;
 use Zonemaster::Engine::Util qw[info name ns should_run_test];
 
@@ -482,11 +483,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub basic01 {
+sub basic01 : TestCase {
     my ( $class, $zone ) = @_;
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Basic01';
 
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     if ( $zone->name eq '.' ) {
         push @results,
@@ -501,7 +501,7 @@ sub basic01 {
              B01_ROOT_HAS_NO_PARENT => {}
           );
 
-        return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+        return @results;
     }
 
     if ( Zonemaster::Engine::Recursor->has_fake_addresses( $zone->name->string ) ) {
@@ -517,7 +517,7 @@ sub basic01 {
               B01_PARENT_DISREGARDED => {}
           );
 
-        return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+        return @results;
     }
 
     my %handled_servers;
@@ -635,7 +635,7 @@ sub basic01 {
                       }
                     );
 
-                    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+                    return @results;
                 }
 
                 last if scalar @{ $intermediate_query_name->labels } >= scalar @{ $zone->name->labels };
@@ -896,8 +896,8 @@ sub basic01 {
         }
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
-} ## end sub basic01
+    return @results;
+}; ## end sub basic01
 
 =over
 
@@ -915,11 +915,10 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub basic02 {
+sub basic02 : TestCase {
     my ( $class, $zone ) = @_;
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Basic02';
 
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
 
     my $query_type = q{SOA};
 
@@ -941,7 +940,7 @@ sub basic02 {
                 }
             );
 
-        return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+        return @results;
     }
 
     if ( not scalar @ns ) {
@@ -1064,7 +1063,7 @@ sub basic02 {
         }
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub basic02
 
 =over
@@ -1083,11 +1082,11 @@ Returns a list of L<Zonemaster::Engine::Logger::Entry> objects.
 
 =cut
 
-sub basic03 {
+sub basic03 : TestCase {
     my ( $class, $zone ) = @_;
-    local $Zonemaster::Engine::Logger::TEST_CASE_NAME = 'Basic03';
 
-    push my @results, _emit_log( TEST_CASE_START => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } );
+    my @results;
+
     my $query_type = q{A};
 
     my $name        = q{www.} . $zone->name;
@@ -1125,7 +1124,7 @@ sub basic03 {
         push @results, _emit_log( A_QUERY_NO_RESPONSES => {} );
     }
 
-    return ( @results, _emit_log( TEST_CASE_END => { testcase => $Zonemaster::Engine::Logger::TEST_CASE_NAME } ) );
+    return @results;
 } ## end sub basic03
 
 1;
