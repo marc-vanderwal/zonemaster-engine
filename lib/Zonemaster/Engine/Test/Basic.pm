@@ -16,7 +16,7 @@ use Zonemaster::Engine::Test::Address;
 use Zonemaster::Engine::Test::Syntax;
 use Zonemaster::Engine::TestCase;
 use Zonemaster::Engine::TestMethods;
-use Zonemaster::Engine::Util qw[info name ns should_run_test];
+use Zonemaster::Engine::Util qw[name ns should_run_test];
 
 =head1 NAME
 
