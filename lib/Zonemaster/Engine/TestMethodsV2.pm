@@ -223,7 +223,7 @@ sub get_parent_ns_names_and_ips {
                         }
                     }
                 }
-                elsif ( $p_soa->rcode eq 'NOERROR' and $p_soa->aa ) {
+                elsif ( ( $p_soa->rcode eq 'NOERROR' or $p_soa->rcode eq 'NXDOMAIN' ) and $p_soa->aa ) {
                     next LOOP if $intermediate_query_name->string ne $zone->name->string;
                 }
 

@@ -128,8 +128,8 @@ sub metadata {
     return {
         basic01 => [
             qw(
-              B01_CHILD_IS_ALIAS
               B01_CHILD_FOUND
+              B01_CHILD_IS_ALIAS
               B01_INCONSISTENT_ALIAS
               B01_INCONSISTENT_DELEGATION
               B01_NO_CHILD
@@ -139,6 +139,7 @@ sub metadata {
               B01_PARENT_UNDETERMINED
               B01_ROOT_HAS_NO_PARENT
               B01_SERVER_ZONE_ERROR
+              B01_UNEXPECTED_NXDOMAIN
               TEST_CASE_END
               TEST_CASE_START
               )
@@ -239,6 +240,12 @@ Readonly my %TAG_DESCRIPTIONS => (
     B01_SERVER_ZONE_ERROR => sub {
         __x    # BASIC:B01_SERVER_ZONE_ERROR
           'Unexpected response on query for "{query_name}" with query type "{rrtype}" to "{ns}".', @_;
+    },
+    B01_UNEXPECTED_NXDOMAIN => sub {
+        __x    # BASIC01:B01_UNEXPECTED_NXDOMAIN
+          'Unexpected NXDOMAIN on intermediate name "{query_name}" between apex and delegation point. '
+          . 'Because of that, the zone "{domain}" might not be resolvable on some DNS resolvers. '
+          . 'Returned from name servers "{ns_list}".', @_;
     },
     B02_AUTH_RESPONSE_SOA => sub {
         __x    # BASIC:B02_AUTH_RESPONSE_SOA
@@ -521,9 +528,10 @@ sub basic01 {
     }
 
     my %handled_servers;
+    my %aa_nxdomain_response;
     my %parent_found;
     my %delegation_found;
-    my %aa_nxdomain;
+    my %aa_nxdomain_found;
     my %aa_soa;
     my %aa_cname;
     my %cname_with_referral;
@@ -719,10 +727,6 @@ sub basic01 {
                         next LOOP;
                     }
                 }
-                elsif ( $p_soa->rcode eq 'NXDOMAIN' and $p_soa->aa ) {
-                    push @{ $parent_found{$loop_zone_name} }, $ns->string;
-                    push @{ $aa_nxdomain{$loop_zone_name} }, $ns->string;
-                }
                 elsif ( $p_soa->is_redirect and scalar $p_soa->get_records_for_name( $type_ns, $intermediate_query_name, 'authority' ) ) {
                     if ( $intermediate_query_name->string eq $zone->name->string ) {
                         push @{ $parent_found{$loop_zone_name} }, $ns->string;
@@ -766,8 +770,18 @@ sub basic01 {
                         }
                     }
                 }
-                elsif ( $p_soa->rcode eq 'NOERROR' and $p_soa->aa ) {
-                    next LOOP if $intermediate_query_name->string ne $zone->name->string;
+                elsif ( ( $p_soa->rcode eq 'NOERROR' or $p_soa->rcode eq 'NXDOMAIN' ) and $p_soa->aa ) {
+                    if ( $intermediate_query_name->string ne $zone->name->string ) {
+                        if ( $p_soa->rcode eq 'NXDOMAIN' ) {
+                            push @{$aa_nxdomain_response{$intermediate_query_name}}, $ns->string;
+                        }
+                        next LOOP;
+                    }
+
+                    if ( $p_soa->rcode eq 'NXDOMAIN' ) {
+                        push @{ $parent_found{$loop_zone_name} }, $ns->string;
+                        push @{ $aa_nxdomain_found{$loop_zone_name} }, $ns->string;
+                    }
 
                     if ( scalar $p_soa->get_records_for_name( 'CNAME', $zone->name, 'answer' ) ) {
                         push @{ $parent_found{$loop_zone_name} }, $ns->string;
@@ -841,7 +855,7 @@ sub basic01 {
           );
 
         unless ( Zonemaster::Engine::Recursor->has_fake_addresses( $zone->name->string ) ) {
-            my @hash_refs = ( \%aa_nxdomain, \%aa_cname, \%cname_with_referral, values %aa_dname, \%aa_nodata );
+            my @hash_refs = ( \%aa_nxdomain_found, \%aa_cname, \%cname_with_referral, values %aa_dname, \%aa_nodata );
             foreach my $parent_domain ( uniq map { keys %$_ } @hash_refs ) {
                 push @results,
                   _emit_log(
@@ -852,6 +866,17 @@ sub basic01 {
                       }
                   );
             }
+        }
+
+        foreach my $qname ( keys %aa_nxdomain_response ) {
+            push @results,
+                _emit_log(
+                    B01_UNEXPECTED_NXDOMAIN => {
+                        query_name => $qname,
+                        domain => $zone->name->string,
+                        ns_list => join( q{;}, sort @{$aa_nxdomain_response{$qname}} )
+                    }
+                );
         }
     }
 

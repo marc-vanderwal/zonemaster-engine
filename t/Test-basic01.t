@@ -20,7 +20,8 @@ all_tags qw(B01_CHILD_IS_ALIAS
             B01_PARENT_NOT_FOUND
             B01_PARENT_UNDETERMINED
             B01_ROOT_HAS_NO_PARENT
-            B01_SERVER_ZONE_ERROR);
+            B01_SERVER_ZONE_ERROR
+            B01_UNEXPECTED_NXDOMAIN);
 
 # Common hint file (test-zone-data/COMMON/hintfile)
 root_hints 'ns1' => [ qw(127.1.0.1 fda1:b2:c3::127:1:0:1) ],

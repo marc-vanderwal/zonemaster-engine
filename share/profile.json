@@ -49,6 +49,7 @@
             "B01_PARENT_UNDETERMINED" : "WARNING",
             "B01_ROOT_HAS_NO_PARENT" : "INFO",
             "B01_SERVER_ZONE_ERROR" : "DEBUG",
+            "B01_UNEXPECTED_NXDOMAIN" : "ERROR",
             "B02_AUTH_RESPONSE_SOA" : "INFO",
             "B02_NO_DELEGATION" : "CRITICAL",
             "B02_NO_WORKING_NS" : "CRITICAL",
