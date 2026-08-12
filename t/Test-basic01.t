@@ -123,4 +123,46 @@ scenario 'ROOT-ZONE' => sub {
     forbid_others;
 };
 
+scenario 'INC-DEL-N-NXDOMAIN-ON-IM-NAME-1' => sub {
+    zone 'child.im.parent.{SCENARIO}.{TESTCASE}.xa';
+    expect qw(B01_CHILD_FOUND B01_INCONSISTENT_DELEGATION B01_PARENT_FOUND);
+    forbid_others;
+};
+
+scenario 'NXDOMAIN-ON-IM-NAME-1' => sub {
+    zone 'child.parent.im.{SCENARIO}.{TESTCASE}.xa';
+    expect qw(B01_CHILD_FOUND B01_PARENT_FOUND B01_UNEXPECTED_NXDOMAIN);
+    forbid_others;
+};
+
+scenario 'NXDOMAIN-ON-IM-NAME-2' => sub {
+    zone 'child.im.parent.{SCENARIO}.{TESTCASE}.xa';
+    expect qw(B01_CHILD_FOUND B01_PARENT_FOUND B01_UNEXPECTED_NXDOMAIN);
+    forbid_others;
+};
+
+scenario 'NXDOMAIN-ON-IM-NAME-3' => sub {
+    zone 'child.im.parent.im.{SCENARIO}.{TESTCASE}.xa';
+    expect qw(B01_CHILD_FOUND B01_PARENT_FOUND B01_UNEXPECTED_NXDOMAIN);
+    forbid_others;
+};
+
+scenario 'NXDOMAIN-N-NON-AA-OM-IM-NAME-1' => sub {
+    zone 'child.parent.im.{SCENARIO}.{TESTCASE}.xa';
+    expect qw(B01_NO_CHILD B01_PARENT_FOUND B01_SERVER_ZONE_ERROR);
+    forbid_others;
+};
+
+scenario 'NXDOMAIN-N-NON-AA-OM-IM-NAME-2' => sub {
+    zone 'child.im.parent.{SCENARIO}.{TESTCASE}.xa';
+    expect qw(B01_NO_CHILD B01_PARENT_FOUND B01_SERVER_ZONE_ERROR);
+    forbid_others;
+};
+
+scenario qw(SERVFAIL-OM-IM-NAME-1 REFUSED-ON-IM-NAME-1 NON-AA-ON-IM-NAME-1) => sub {
+    zone 'child.im.parent.{SCENARIO}.{TESTCASE}.xa';
+    expect qw(B01_NO_CHILD B01_PARENT_FOUND B01_SERVER_ZONE_ERROR);
+    forbid_others;
+};
+
 no_more_scenarios;
