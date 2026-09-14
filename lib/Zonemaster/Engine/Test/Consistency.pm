@@ -831,7 +831,11 @@ sub consistency05 {
 
     # Step 4
     foreach my $parent_ns ( @parent_ns_ips ) {
-        my $p = $parent_ns->query( $zone->name(), 'SOA' );
+        # Do SOA query over TCP preferably, but fall back to UDP if name
+        # server does not respond over TCP.
+        my $p = $parent_ns->query( $zone->name(), 'SOA', { usevc => 1 } );
+        $p //= $parent_ns->query( $zone->name(), 'SOA' );
+
         next unless ( defined $p and $p->is_redirect );
 
         my %authority =
